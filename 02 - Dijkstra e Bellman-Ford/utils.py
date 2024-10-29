@@ -6,7 +6,7 @@ def gerar_grafo(n_vertices):
     grafo = {}
 
     for vertice in vertices:
-        n_arestas = randint(5, min(20, n_vertices - 1))
+        n_arestas = randint(2, min(20, n_vertices - 1))
         vizinhos = sample([v for v in vertices if v != vertice], n_arestas)
         grafo[vertice] = { vizinho: randint(3, 10) for vizinho in vizinhos }
 
