@@ -46,8 +46,23 @@ print(f"Bellman-Ford: {truncate_obj(bellman_ford)}\nTempo: {tempo_bellman_ford:.
 print("\nGrafo grande (1000 vértices):")
 grafo_G = gerar_grafo(1000)
 
-dijkstra_result, dijkstra_time = calcular_tempo(alg_dijkstra, grafo_G, 'A')
-print(f"Dijkstra: {truncate_obj(dijkstra_result)}...\nTempo: {dijkstra_time:.6f} segundos")
+bellman_ford, dijkstra_time = calcular_tempo(alg_dijkstra, grafo_G, 'A')
+print(f"Dijkstra: {truncate_obj(bellman_ford)}...\nTempo: {dijkstra_time:.6f} segundos")
 
-bellman_ford_result, bellman_ford_time = calcular_tempo(alg_bellman_ford, grafo_G, 'A')
-print(f"Bellman-Ford: {truncate_obj(bellman_ford_result)}...\nTempo: {bellman_ford_time:.6f} segundos")
+bellman_ford, bellman_ford_time = calcular_tempo(alg_bellman_ford, grafo_G, 'A')
+print(f"Bellman-Ford: {truncate_obj(bellman_ford)}...\nTempo: {bellman_ford_time:.6f} segundos")
+
+print("\nGrafo com ciclos negativos:")
+grafo_N = {
+    'A': { 'B': -1, 'C': 4 },
+    'B': { 'C': 3, 'D': 2, 'E': 2 },
+    'C': { },
+    'D': { 'A': 1, 'C': 5 },
+    'E': { 'D': -3 }
+}
+
+bellman_ford, dijkstra_time = calcular_tempo(alg_dijkstra, grafo_N, 'A')
+print(f"Dijkstra: {truncate_obj(bellman_ford)}...\nTempo: {dijkstra_time:.6f} segundos")
+
+bellman_ford, bellman_ford_time = calcular_tempo(alg_bellman_ford, grafo_N, 'A')
+print(f"Bellman-Ford: {truncate_obj(bellman_ford)}...\nTempo: {bellman_ford_time:.6f} segundos")
