@@ -50,6 +50,7 @@ origem = 99
 sumidouro = 444
 
 i = time()
+print("Grafo com 500 vertices")
 print("O fluxo máximo da rede de distribuição de água é:", g.ford_fulkerson(origem, sumidouro))
 print(f'Tempo: {(time() - i):.4f} segundos')
 
@@ -58,5 +59,6 @@ origem = 55
 sumidouro = 639
 
 i = time()
+print("Grafo com 1000 vertices")
 print("O fluxo máximo da rede de transporte é:", g.ford_fulkerson(origem, sumidouro))
 print(f'Tempo: {(time() - i):.4f} segundos')
