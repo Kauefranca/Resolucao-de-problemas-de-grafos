@@ -1,4 +1,5 @@
 # Imports para gerar grafos aleatórios
+from time import time
 from random import random
 from string import ascii_uppercase
 
@@ -67,7 +68,7 @@ def verificar_emparelhamento(esquerda, direita, arestas, emparelhamento):
 
 
 def gerar_grafo_bipartido(tamanho_esquerda, tamanho_direita, probabilidade_aresta=0.5):
-    esquerda = list(ascii_uppercase[:tamanho_esquerda])
+    esquerda = [f'Y{i+1}' for i in range(tamanho_direita)]
     direita = [f'X{i+1}' for i in range(tamanho_direita)]
     arestas = []
 
@@ -79,18 +80,21 @@ def gerar_grafo_bipartido(tamanho_esquerda, tamanho_direita, probabilidade_arest
     return esquerda, direita, arestas
 
 
-tamanho_esquerda = 50
-tamanho_direita = 50
-probabilidade_aresta = 0.3
+tamanho_esquerda = 100
+tamanho_direita = 100
+probabilidade_aresta = 0.5
 
 esquerda, direita, arestas = gerar_grafo_bipartido(tamanho_esquerda, tamanho_direita, probabilidade_aresta)
 
-print(f"Lado esquerdo: {esquerda[:50]}...") # Corta a exibição em 50 caracteres
-print(f"Lado direito: {direita[:50]}...")
-print(f"Arestas: {arestas[:50]}...")
+print(f"Vértices esquerda: {tamanho_esquerda}")
+print(f"Vértices direita: {tamanho_direita}")
+print(f"Total Arestas: {len(arestas)}")
 
 grafo, fonte, sumidouro = criar_grafo_bipartido(esquerda, direita, arestas)
+
+i = time()
 emparelhamento_maximo = edmonds_karp(grafo, fonte, sumidouro)
+print(f"Tempo de execução: {time() - i:.2f}s")
 
 print(f"\nTamanho do emparelhamento máximo: {emparelhamento_maximo}")
 
@@ -100,9 +104,9 @@ for i, u in enumerate(esquerda, 1):
         if grafo[j][i] == 1:  # Fluxo reverso indica uma aresta no emparelhamento
             emparelhamento.append((u, v))
 
-print("Emparelhamento máximo:")
-for aresta in emparelhamento:
+print("Emparelhamento máximo (primeiros 20 pares):")
+for aresta in emparelhamento[:20]:
     print(f"{aresta[0]} - {aresta[1]}")
 
 eh_valido = verificar_emparelhamento(esquerda, direita, arestas, emparelhamento)
-print(f"O emparelhamento é válido e máximo? {'Sim' if eh_valido else 'Não'}")
+print(f"O emparelhamento é válido e máximo? {'Sim!' if eh_valido else 'Não!'}")
